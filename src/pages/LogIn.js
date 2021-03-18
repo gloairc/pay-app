@@ -1,12 +1,7 @@
 import { useState } from "react";
+import LoginSignup from "../components/LoginSignup"
 import axios from "axios";
-import {
-    Form,
-    Button,
-    Row,
-    Col,
-    Alert,
-} from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 
 const jwt = require("jsonwebtoken");
 
@@ -17,7 +12,7 @@ const LogIn = (props) => {
     });
 
     const [errorMsg, setErrorMsg] = useState("");
-    const [loginStatus, setLoginStatus] = useState(false); //to redirect to /beatseq
+    const [loginStatus, setLoginStatus] = useState(false); //to redirect to /
     const [status, setStatus] = useState(""); //inform user that logging in
 
     const secret = process.env.JWT_SECRET_KEY;
@@ -64,7 +59,7 @@ const LogIn = (props) => {
             });
     };
 
-    const message = () => {
+    const setMessage = () => {
         if (errorMsg) {
             console.log(errorMsg);
             return (
@@ -87,71 +82,7 @@ const LogIn = (props) => {
 
     return (
         <div id="login-cont" class="container-fluid">
-            <div class="form-h1">
-                <h1>Log In</h1>
-            </div>
-
-            <div id="login-form-cont" class="container-fluid">
-                <Form onSubmit={handleLogin}>
-                    <Form.Group controlId="username">
-                        <Form.Label>
-                            <span class="fw-bold">Username</span>
-                        </Form.Label>
-                        <Col>
-                            <Form.Control
-                                type="text"
-                                placeholder="username"
-                                value={formData.username}
-                                onChange={(event) => {
-                                    // console.log(event.target)
-                                    setFormData((state) => {
-                                        return { ...state, username: event.target.value };
-                                    });
-                                }}
-                            />
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group controlId="password">
-                        <Form.Label>
-                            <span class="fw-bold">Password</span>
-                        </Form.Label>
-                        <Col>
-                            <Form.Control
-                                type="Password"
-                                placeholder="password"
-                                value={formData.password}
-                                onChange={(event) => {
-                                    setFormData((state) => {
-                                        return { ...state, password: event.target.value };
-                                    });
-                                }}
-                            />
-                        </Col>
-                    </Form.Group>
-
-                    <br />
-                    <Row>
-                        <Button variant="primary" type="submit" block>
-                            Log In
-                </Button>
-                    </Row>
-
-                    <br />
-                    <Row>
-                        {message()}
-                    </Row>
-                </Form>
-            </div>
-
-            <div id="login-signup" class="container-fluid">
-                <Row>
-                    Don't have an account?
-                <Button variant="secondary" block>
-                        Sign Up
-                </Button>
-                </Row>
-            </div>
+            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Log In" button="Let's Go" oppHeader="Sign Up" />
         </div>
     )
 }
