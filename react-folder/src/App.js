@@ -16,7 +16,24 @@ import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import Logout from "./pages/Logout"
 
+const jwt = require("jsonwebtoken");
+
 function App() {
+  const [user, setUser] = useState({});
+  console.log("user at App", user);
+
+  // const secret = process.env.JWT_SECRET_KEY
+  // console.log("secret is ", secret)
+  const token = localStorage.getItem("token");
+
+
+  useEffect(() => {
+    if (token !== null) { // logged in
+      const decoded = jwt.verify(token, "secret"); //cant read secret :/
+      setUser({ userId: decoded.user._id, username: decoded.user.username })
+    }
+  }, [user.userId])
+
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
       <Router>
@@ -35,8 +52,8 @@ function App() {
 
           {/* landing page - balance, button to make transfer or see history */}
           <Route exact path="/landing">
-            <Landing />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Landing />} */}
+            <Landing setUser={setUser} />
+            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser}/>} */}
           </Route>
 
           {/* Transfer $ to someone */}
@@ -51,7 +68,7 @@ function App() {
           </Route>
 
           <Route exact path="/signup">
-            <SignUp />
+            <SignUp setUser={setUser} />
             {/* {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />} */}
           </Route>
 
