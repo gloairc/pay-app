@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const jwtSession = express.Router();
 const createJWTToken = require("./createJWTconfig");
-const User = require("../model/user.js");
+const User = require("../model/userM.js");
 const { StatusCodes } = require("http-status-codes");
 
 //login

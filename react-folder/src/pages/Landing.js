@@ -17,7 +17,7 @@ const Landing = (props) => {
                 </Row>
                 <br />
                 <Row>
-                    <Button as={Link} to="/transfer/1" block> Make Transaction</Button>
+                    <Button as={Link} to="/transfer" block> Make Transaction</Button>
                 </Row>
             </div>
 

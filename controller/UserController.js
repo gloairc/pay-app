@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
-const User = require("../model/user");
+const User = require("../model/userM");
 const { body, validationResult } = require("express-validator");
 const methodOverride = require("method-override");
 router.use(methodOverride("_method"));
@@ -22,20 +22,18 @@ router.get("/seed", (req, res) => {
     });
 });
 
-// INDEX, check for existing username
+// INDEX, check for existing username and retrieve receipient
 router.get("/", (req, res) => {
     if (req.query.username) { //if query has username, check if it exist
         console.log("req.query.username", req.query.username);
-        User.find({ username: req.query.username }, (error, oneUser) => {
+        User.find({ username: req.query.username }, { username: 1, _id: 1, mobile: 1 }, (error, oneUser) => {
             if (error) {
                 res.status(StatusCodes.BAD_REQUEST).send(error);
             } else { //user exist
-                // console.log(oneUser) //[{username:...,}]
+                // console.log("oneUser", oneUser) //[{username:...,}]
                 const userObj = oneUser[0]
-                // console.log(userObj)
-                const userNoPw = { ...userObj, password: "" }; //do not return password
-                res.status(StatusCodes.OK).send(userNoPw);
-                // console.log(userNoPw)
+                res.status(StatusCodes.OK).send(userObj);
+                console.log(userObj)
             }
         }).lean()
     }

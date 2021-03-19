@@ -9,8 +9,7 @@ import {
 import NavyBar from "./pages/Navbar"
 import LogIn from "./pages/LogIn"
 import Landing from "./pages/Landing"
-import Transaction1 from "./pages/Transaction1"
-import Transaction2 from "./pages/Transaction2"
+import Transaction from "./pages/Transaction"
 import SignUp from "./pages/SignUp"
 import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
@@ -36,14 +35,14 @@ function App() {
     }
   }, [token])
 
-  useEffect(() => { //update User
-    axios
-      .get(`/api/user/${user.userId}`)
-      .then((response) => {
-        console.log(response)
-      }
-      )
-  }, [])
+  // useEffect(() => { //update User
+  //   axios
+  //     .get(`/api/user/${user.userId}`)
+  //     .then((response) => {
+  //       console.log(response)
+  //     }
+  //     )
+  // }, [])
 
 
   return (
@@ -69,15 +68,14 @@ function App() {
             </Route>
 
             {/* Transfer $ to someone */}
-            <Route exact path="/transfer/1">
-              <Transaction1 />
-              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction1 />} */}
+            <Route exact path="/transfer">
+              {/* <Transaction1 /> */}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} />}
             </Route>
 
-            <Route exact path="/transfer/2">
-              <Transaction2 />
-              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction2 />} */}
-            </Route>
+            {/* <Route exact path="/transfer/2">
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction2 />}
+            </Route> */}
 
             <Route exact path="/signup">
               {/* <SignUp setUser={setUser} /> */}

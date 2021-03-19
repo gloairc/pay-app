@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Transaction = require("../model/transaction");
+const Transaction = require("../model/transactionM");
 const methodOverride = require("method-override");
 router.use(methodOverride("_method"));
 
