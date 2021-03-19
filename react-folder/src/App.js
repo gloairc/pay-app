@@ -51,55 +51,59 @@ function App() {
       <Router>
         <NavyBar user={user} />
 
-        <Switch>
-          {/* Log in */}
-          <Route exact path="/">
-            {user.userId === undefined ? <LogIn setUser={setUser} /> : <Redirect to={"/landing"} />}
-          </Route>
+        <div id="body-cont" class="container-fluid">
+          <Switch>
+            {/* Log in */}
+            <Route exact path="/">
+              {user.userId === undefined ? <LogIn setUser={setUser} /> : <Redirect to={"/landing"} />}
+            </Route>
 
-          <Route exact path="/restricted">
-            <h1>You are not authorised to visit this page.</h1>
-          </Route>
+            <Route exact path="/restricted">
+              <h1>You are not authorised to visit this page.</h1>
+            </Route>
 
-          {/* landing page - balance, button to make transfer or see history */}
-          <Route exact path="/landing">
-            {/* <Landing setUser={setUser} /> */}
-            {user.userId === undefined ? <Redirect to={"/"} /> : <Landing user={user} />}
-          </Route>
+            {/* landing page - balance, button to make transfer or see history */}
+            <Route exact path="/landing">
+              {/* <Landing setUser={setUser} /> */}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Landing user={user} />}
+            </Route>
 
-          {/* Transfer $ to someone */}
-          <Route exact path="/transfer/1">
-            <Transaction1 />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction1 />} */}
-          </Route>
+            {/* Transfer $ to someone */}
+            <Route exact path="/transfer/1">
+              <Transaction1 />
+              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction1 />} */}
+            </Route>
 
-          <Route exact path="/transfer/2">
-            <Transaction2 />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction2 />} */}
-          </Route>
+            <Route exact path="/transfer/2">
+              <Transaction2 />
+              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction2 />} */}
+            </Route>
 
-          <Route exact path="/signup">
-            {/* <SignUp setUser={setUser} /> */}
-            {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />}
-          </Route>
+            <Route exact path="/signup">
+              {/* <SignUp setUser={setUser} /> */}
+              {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />}
+            </Route>
 
-          <Route exact path="/history">
-            <History />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
-          </Route>
+            <Route exact path="/history">
+              <History />
+              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
+            </Route>
 
-          <Route exact path="/history/:id">
-            <HistoryDetails />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
-          </Route>
+            <Route exact path="/history/:id">
+              <HistoryDetails />
+              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
+            </Route>
 
 
-          <Route exact path="/logout">
-            <Logout />
-            {user.userId === undefined ? <Redirect to={"/"} /> : <Logout user={user} setUser={setUser} />}
-          </Route>
-        </Switch>
+            <Route exact path="/logout">
+              <Logout />
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Logout user={user} setUser={setUser} />}
+            </Route>
+          </Switch>
+        </div>
+
       </Router>
+
     </div>
   );
 }

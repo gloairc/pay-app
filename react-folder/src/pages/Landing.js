@@ -1,4 +1,5 @@
 import { Button, Row } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 const Landing = (props) => {
 
@@ -12,11 +13,11 @@ const Landing = (props) => {
 
             <div class="mt-3">
                 <Row>
-                    <Button href="/history" block>View History</Button>
+                    <Button as={Link} to="/history" block>View History</Button>
                 </Row>
                 <br />
                 <Row>
-                    <Button href="/transfer/1" block> Make Transaction</Button>
+                    <Button as={Link} to="/transfer/1" block> Make Transaction</Button>
                 </Row>
             </div>
 
