@@ -30,9 +30,9 @@ const SignUp = (props) => {
                     .then((response) => {
                         console.log("response.data from post api session", response.data);
                         if (response.data.token) {//get token
-                            //set token to localStorage
+                            //set token to sessionStorage
                             const token = response.data.token;
-                            localStorage.setItem("token", token);
+                            sessionStorage.setItem("token", token);
                             const decoded = jwt.verify(token, secret); //cant read secret :/
                             const user = {
                                 userId: decoded.user._id,

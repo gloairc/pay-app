@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoginSignup from "../components/LoginSignup"
 import axios from "axios";
 import { Alert } from "react-bootstrap";
+import { Redirect } from 'react-router-dom';
 
 const jwt = require("jsonwebtoken");
 
@@ -12,10 +13,10 @@ const LogIn = (props) => {
     });
 
     const [errorMsg, setErrorMsg] = useState("");
-    const [loginStatus, setLoginStatus] = useState(false); //to redirect to /
-    const [status, setStatus] = useState(""); //inform user that logging in
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const secret = process.env.JWT_SECRET_KEY;
+    const secret = process.env.REACT_APP_JWT_SECRET_KEY;
+    console.log("secret", secret)
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -25,27 +26,27 @@ const LogIn = (props) => {
             .then((response) => {
                 console.log("response.data", response.data);
                 if (response.data.token) {
-                    //set token to localStorage
+                    //set token to sessionStorage
                     const token = response.data.token;
-                    localStorage.setItem("token", token);
+                    sessionStorage.setItem("token", token);
                     const decoded = jwt.verify(token, secret); //cant read secret :/
                     const user = {
                         userId: decoded.user._id,
                         username: decoded.user.username,
                     }; //useState or if statement?
-                    setStatus("logging in"); //re-render
                     props.setUser(user);
                     console.log("logging in");
-                    setTimeout(() => {
-                        setLoginStatus(true);
-                    }, 800);
+                    setIsLoggedIn(true)
                 }
             })
-            .catch((error) => {
+            .catch((error) => { //error 
                 //handling error not working
-                setStatus("");
                 // setErrorMsg(error.error);
-                if (error.response.data.error === undefined) {
+                console.log(error)
+                if (error.response === undefined) { //JSON token error
+                    setErrorMsg(error.message)
+                }
+                else if (error.response.data.error === undefined) {
                     setErrorMsg(error.response.statusText);
                 } else {
                     setErrorMsg(
@@ -53,8 +54,8 @@ const LogIn = (props) => {
                     );
                 } // custom message from backend
                 console.log(
-                    "error from posting session error.response",
-                    error.response
+                    "error from posting session error",
+                    error
                 );
             });
     };
@@ -69,16 +70,14 @@ const LogIn = (props) => {
                     {errorMsg}
                 </Alert>
             );
-        } else if (status === "logging in") {
-            return (
-                <Alert variant="success">
-                    <span class="font-weight-bold">Success : </span>Get ready to dope!
-                </Alert>
-            );
         } else {
             return <span />;
         }
     };
+
+    if (isLoggedIn === true) {
+        return <Redirect to={"/landing"} />;
+    }
 
     return (
         <div id="login-cont" class="container-fluid">

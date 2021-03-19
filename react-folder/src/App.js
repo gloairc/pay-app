@@ -22,14 +22,14 @@ function App() {
   const [user, setUser] = useState({});
   console.log("user at App", user);
 
-  // const secret = process.env.JWT_SECRET_KEY
-  // console.log("secret is ", secret)
-  const token = localStorage.getItem("token");
+  const secret = process.env.REACT_APP_JWT_SECRET_KEY
+  const token = sessionStorage.getItem("token");
 
 
   useEffect(() => {
     if (token !== null) { // logged in
-      const decoded = jwt.verify(token, "secret"); //cant read secret :/
+      const decoded = jwt.verify(token, secret); //cant read secret :/
+      // if token has expire, clear the token
       setUser({ userId: decoded.user._id, username: decoded.user.username })
     }
   }, [user.userId])
@@ -37,13 +37,12 @@ function App() {
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
       <Router>
-        <NavBar />
-        {/* <NavBar user={user} /> */}
+        <NavBar user={user} />
 
         <Switch>
           {/* Log in */}
           <Route exact path="/">
-            <LogIn />
+            <LogIn setUser={setUser} />
           </Route>
 
           <Route exact path="/restricted">
@@ -52,8 +51,8 @@ function App() {
 
           {/* landing page - balance, button to make transfer or see history */}
           <Route exact path="/landing/:id">
-            <Landing setUser={setUser} />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser}/>} */}
+            {/* <Landing setUser={setUser} /> */}
+            {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser} />}
           </Route>
 
           {/* Transfer $ to someone */}

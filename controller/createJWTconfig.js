@@ -13,7 +13,7 @@ const createJWTToken = (username) => {
     const exp = new Date(today);
 
     const secret = getJWTSecret();
-    exp.setDate(today.getDate()); // remove +60
+    exp.setDate(today.getDate() + 60);
 
     const payload = { user: username, exp: parseInt(exp.getTime() / 1000) };
     const token = jwt.sign(payload, secret);
