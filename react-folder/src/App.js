@@ -15,7 +15,7 @@ import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import Logout from "./pages/Logout"
 
-import axios from "axios"
+// import axios from "axios"
 
 const jwt = require("jsonwebtoken");
 
@@ -83,13 +83,13 @@ function App() {
             </Route>
 
             <Route exact path="/history">
-              <History />
-              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
+              {/* <History /> */}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <History />}
             </Route>
 
             <Route exact path="/history/:id">
-              <HistoryDetails />
-              {/* {user.userId === undefined ? <Redirect to={"/"} /> : <History />} */}
+              {/* <HistoryDetails /> */}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <HistoryDetails />}
             </Route>
 
 

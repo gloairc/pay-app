@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema(
     {
-        To: { type: String, required: true },
-        From: { type: String, required: true },
-        Amount: { type: Number, required: true },
-        Comment: { type: String, required: true },
+        to: { type: String, required: true },
+        from: { type: String, required: true },
+        amount: { type: Number, required: true },
+        comment: { type: String, required: true },
     },
     { timestamps: true }
 );

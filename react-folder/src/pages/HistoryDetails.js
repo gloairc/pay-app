@@ -1,15 +1,16 @@
 import { Row, Button } from "react-bootstrap"
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
 const HistoryDetails = () => {
+    const transactionId = useParams().id;
 
     return (
         <div>
-            Transaction History Specific
+            Transaction History Specific {transactionId}
             <div>
                 <Row>
-                    <Button as={Link} to="/history">Back</Button>
+                    <Button as={Link} to="/history">All Transactions</Button>
                 </Row>
             </div>
         </div>
