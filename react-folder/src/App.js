@@ -16,6 +16,8 @@ import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import Logout from "./pages/Logout"
 
+import axios from "axios"
+
 const jwt = require("jsonwebtoken");
 
 function App() {
@@ -26,13 +28,23 @@ function App() {
   const token = sessionStorage.getItem("token");
 
 
-  useEffect(() => {
+  useEffect(() => {// initial setup for user
     if (token !== null) { // logged in
       const decoded = jwt.verify(token, secret); //cant read secret :/
       // if token has expire, clear the token
-      setUser({ userId: decoded.user._id, username: decoded.user.username })
+      setUser({ userId: decoded.user._id, username: decoded.user.username, balance: decoded.user.balance, transactions: decoded.user.transactions, updatedAt: decoded.user.updatedAt })
     }
   }, [user.userId])
+
+  useEffect(() => { //update User
+    axios
+      .get(`/api/user/${user.userId}`)
+      .then((response) => {
+        console.log(response)
+      }
+      )
+  }, [])
+
 
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
@@ -52,7 +64,7 @@ function App() {
           {/* landing page - balance, button to make transfer or see history */}
           <Route exact path="/landing">
             {/* <Landing setUser={setUser} /> */}
-            {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser} />}
+            {user.userId === undefined ? <Redirect to={"/"} /> : <Landing user={user} />}
           </Route>
 
           {/* Transfer $ to someone */}
@@ -67,8 +79,8 @@ function App() {
           </Route>
 
           <Route exact path="/signup">
-            <SignUp setUser={setUser} />
-            {/* {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />} */}
+            {/* <SignUp setUser={setUser} /> */}
+            {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />}
           </Route>
 
           <Route exact path="/history">

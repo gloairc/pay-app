@@ -50,8 +50,10 @@ const SignUp = (props) => {
                     })
                     .catch((error) => {
                         //handling session error not working??
-                        console.log(error.response)
-                        if (error.response.data.error === undefined) {
+                        console.log(error)
+                        if (error.response === undefined) { //JSON token error etc
+                            setErrorMsg(error.message)
+                        } else if (error.response.data.error === undefined) {
                             setErrorMsg(error.response.statusText)
                         } else {
                             setErrorMsg([{ msg: (error.response.statusText) + ", " + (error.response.data.error) }]);

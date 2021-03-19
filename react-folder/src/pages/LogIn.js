@@ -43,7 +43,7 @@ const LogIn = (props) => {
                 //handling error not working
                 // setErrorMsg(error.error);
                 console.log(error)
-                if (error.response === undefined) { //JSON token error
+                if (error.response === undefined) { //JSON token error etc
                     setErrorMsg(error.message)
                 }
                 else if (error.response.data.error === undefined) {
