@@ -33,19 +33,8 @@ const SignUp = (props) => {
                             //set token to sessionStorage
                             const token = response.data.token;
                             sessionStorage.setItem("token", token);
-                            const decoded = jwt.verify(token, secret); //cant read secret :/
-                            const user = {
-                                userId: decoded.user._id,
-                                username: decoded.user.username,
-                            };
                             console.log("logging in");
-                            props.setUser(user);
-
-                            // setLoginMsg(true)
-                            // // setSent(true); //created user & posted session
-                            // setTimeout(() => {
-                            //     setSent(true)
-                            // }, 1000);
+                            props.setUser(token);
                         }
                     })
                     .catch((error) => {

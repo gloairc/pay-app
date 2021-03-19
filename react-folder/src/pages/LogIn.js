@@ -16,7 +16,6 @@ const LogIn = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const secret = process.env.REACT_APP_JWT_SECRET_KEY;
-    console.log("secret", secret)
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -29,12 +28,7 @@ const LogIn = (props) => {
                     //set token to sessionStorage
                     const token = response.data.token;
                     sessionStorage.setItem("token", token);
-                    const decoded = jwt.verify(token, secret); //cant read secret :/
-                    const user = {
-                        userId: decoded.user._id,
-                        username: decoded.user.username,
-                    }; //useState or if statement?
-                    props.setUser(user);
+                    props.setUser(token);
                     console.log("logging in");
                     setIsLoggedIn(true)
                 }
@@ -76,6 +70,7 @@ const LogIn = (props) => {
     };
 
     if (isLoggedIn === true) {
+
         return <Redirect to={"/landing"} />;
     }
 

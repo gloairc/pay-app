@@ -60,6 +60,8 @@ router.post(
     body("username", "Username has to be at least 6 characters long.")
         .trim()
         .isLength({ min: 6 }),
+    body("mobile", "Please enter a valid 8-digit mobile number")
+        .trim().isLength(8).bail().isNumeric().bail(),
     body("password", "Password has to be 6 digit long.")
         .trim().isLength(6).bail().isNumeric().bail(),
     (req, res) => {

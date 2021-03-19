@@ -32,9 +32,9 @@ function App() {
     if (token !== null) { // logged in
       const decoded = jwt.verify(token, secret); //cant read secret :/
       // if token has expire, clear the token
-      setUser({ userId: decoded.user._id, username: decoded.user.username, balance: decoded.user.balance, transactions: decoded.user.transactions, updatedAt: decoded.user.updatedAt })
+      setUser({ userId: decoded.user._id, username: decoded.user.username, mobile: decoded.user.mobile, balance: decoded.user.balance, transactions: decoded.user.transactions, updatedAt: decoded.user.updatedAt })
     }
-  }, [user.userId])
+  }, [token])
 
   useEffect(() => { //update User
     axios
