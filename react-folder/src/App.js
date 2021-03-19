@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import NavBar from "./pages/Navbar"
+import NavyBar from "./pages/Navbar"
 import LogIn from "./pages/LogIn"
 import Landing from "./pages/Landing"
 import Transaction1 from "./pages/Transaction1"
@@ -37,12 +37,12 @@ function App() {
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
       <Router>
-        <NavBar user={user} />
+        <NavyBar user={user} />
 
         <Switch>
           {/* Log in */}
           <Route exact path="/">
-            <LogIn setUser={setUser} />
+            {user.userId === undefined ? <LogIn setUser={setUser} /> : <Redirect to={"/landing"} />}
           </Route>
 
           <Route exact path="/restricted">
@@ -50,7 +50,7 @@ function App() {
           </Route>
 
           {/* landing page - balance, button to make transfer or see history */}
-          <Route exact path="/landing/:id">
+          <Route exact path="/landing">
             {/* <Landing setUser={setUser} /> */}
             {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser} />}
           </Route>
@@ -84,7 +84,7 @@ function App() {
 
           <Route exact path="/logout">
             <Logout />
-            {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Logout user={user} setUser={setUser} />} */}
+            {user.userId === undefined ? <Redirect to={"/"} /> : <Logout user={user} setUser={setUser} />}
           </Route>
         </Switch>
       </Router>
