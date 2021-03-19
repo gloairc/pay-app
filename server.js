@@ -5,8 +5,6 @@ const express = require("express");
 const methodOverride = require("method-override");
 const app = express();
 
-// var MONGODB_URI =  "mongodb+srv://<username>:<password>!xxxxx";
-
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.json());
@@ -21,20 +19,20 @@ app.use(
 );
 
 const mongoose = require("mongoose");
-mongoose.connect(MONGODB_URI || process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI, { // ||MONGODB_URI="mongodb+srv://<username>:<password>!xxxxx";
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
 });
 
-const TransactionController = require("./controllers/TransactionController");
-app.use("/api/beatsequence", TransactionController);
+const TransactionController = require("./controller/TransactionController");
+app.use("/api/transaction", TransactionController);
 
 
-const UserController = require("./controllers/UserController");
+const UserController = require("./controller/UserController");
 app.use("/api/user", UserController);
 
-const jwtController = require("./controllers/JwtController");
+const jwtController = require("./controller/JwtController");
 app.use("/api/session", jwtController);
 
 

@@ -50,6 +50,7 @@ const SignUp = (props) => {
                     })
                     .catch((error) => {
                         //handling session error not working??
+                        console.log(error.response)
                         if (error.response.data.error === undefined) {
                             setErrorMsg(error.response.statusText)
                         } else {
@@ -60,30 +61,39 @@ const SignUp = (props) => {
             .catch((error) => {// catch post error, validation of signup form
                 //handling error not working?
                 console.log("error from posting user SIGNUP", error.response.data.errors);
-                console.log("error from posting user", error.response.data.error);
-                console.log("error from posting user error.response", error.response);
-                if (error.response.data.errors === undefined) {
+                // console.log("error from posting user", error.response.data.error);
+                // console.log("error from posting user error.response", error.response);
+                if (error.response.data.errors === undefined) { //no message
                     setErrorMsg([{ msg: error.response.statusText }])
                 } else {
-                    setErrorMsg(error.response.data.errors);
+                    setErrorMsg(error.response.data.errors); //array of object
                 }
             });
     };
 
+
+    const showErrorMsg = () => {
+        let showErrorArray = []
+        showErrorArray.push(<p>Error!</p>);
+        for (let i = 0; i < errorMsg.length; i++) {
+            showErrorArray.push(<p key={i}>{errorMsg[i].msg}</p>);
+        }
+        return showErrorArray
+    }
+
     const setMessage = () => {
         if (errorMsg) {
-            console.log(errorMsg);
             return (
                 <Alert variant="danger">
                     {" "}
-                    <span class="font-weight-bold">Oh no! </span>
-                    {errorMsg}
+                    <span class="fw-bold">Oh no! </span>
+                    {showErrorMsg()}
                 </Alert>
             );
         } else if (status === "logging in") {
             return (
                 <Alert variant="success">
-                    <span class="font-weight-bold">Success : </span>Get ready to dope!
+                    <span class="fw-bold">Success : </span> opening up your e-wallet
                 </Alert>
             );
         } else {
@@ -93,7 +103,7 @@ const SignUp = (props) => {
 
     return (
         <div id="login-cont" class="container-fluid">
-            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" />
+            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" oppHeaderLink="/" usernameText="at least 6 alphanumeric character" passwordText="6-digit pin" />
         </div>
     )
 }

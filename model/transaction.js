@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const transactionSchema = new mongoose.Schema(
     {
         To: { type: String, required: true },
         From: { type: String, required: true },
@@ -10,6 +10,6 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Transactions = mongoose.model("Transactions", transactionSchema);
+const Transaction = mongoose.model("Transactions", transactionSchema);
 
-module.exports = Transactions;
+module.exports = Transaction;

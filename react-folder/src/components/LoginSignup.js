@@ -23,7 +23,7 @@ const LoginSignup = (props) => {
                         <Col>
                             <Form.Control
                                 type="text"
-                                placeholder="username"
+                                placeholder={props.usernameText}
                                 value={props.formData.username}
                                 onChange={(event) => {
                                     // console.log(event.target)
@@ -41,13 +41,18 @@ const LoginSignup = (props) => {
                         </Form.Label>
                         <Col>
                             <Form.Control
-                                type="Password"
-                                placeholder="password"
+                                type="password"
+                                placeholder={props.passwordText}
                                 value={props.formData.password}
                                 onChange={(event) => {
+                                    // console.log(event.target.value)
+                                    //figure out a way to only allow 6 digit number
+                                    // if (event.target.value.match(/[0-9]*/)) {
                                     props.setFormData((state) => {
                                         return { ...state, password: event.target.value };
-                                    });
+                                    }
+                                    )
+                                    // };
                                 }}
                             />
                         </Col>
@@ -70,7 +75,7 @@ const LoginSignup = (props) => {
             <div id="login-signup" class="container-fluid">
                 <Row>
                     Don't have an account?
-                <Button variant="secondary" block>
+                <Button variant="secondary" block href={props.oppHeaderLink}>
                         {props.oppHeader}
                     </Button>
                 </Row>

@@ -51,7 +51,7 @@ function App() {
           </Route>
 
           {/* landing page - balance, button to make transfer or see history */}
-          <Route exact path="/landing">
+          <Route exact path="/landing/:id">
             <Landing setUser={setUser} />
             {/* {user.userId === undefined ? <Redirect to={"/"} /> : <Landing setUser={setUser}/>} */}
           </Route>

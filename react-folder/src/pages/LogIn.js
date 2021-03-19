@@ -82,7 +82,7 @@ const LogIn = (props) => {
 
     return (
         <div id="login-cont" class="container-fluid">
-            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Log In" button="Let's Go" oppHeader="Sign Up" />
+            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Log In" button="Let's Go" oppHeader="Sign Up" oppHeaderLink="/signup" />
         </div>
     )
 }
