@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {// initial setup for user
     if (token !== null) { // logged in
       const decoded = jwt.verify(token, secret); //cant read secret :/
-      // if token has expire, clear the token
+      // TO DO: if token has expire, clear the token
       setUser({ userId: decoded.user._id, username: decoded.user.username, mobile: decoded.user.mobile, balance: decoded.user.balance, transactions: decoded.user.transactions, updatedAt: decoded.user.updatedAt })
     }
   }, [token])
