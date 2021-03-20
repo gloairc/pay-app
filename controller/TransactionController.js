@@ -19,9 +19,15 @@ router.get("/seed", (req, res) => {
 
 //index, get all transaction of the person
 router.get("/", (req, res) => {
-
-    Transaction.find({}, (error, transaction) => {
-        res.send(transaction);
+    console.log("req.query to search", req.query);
+    console.log("req.query.startDate", req.query.startDate)
+    // console.log(new Date(req.query.startDate));
+    Transaction.find({ $or: [{ to: req.query.to }, { from: req.query.from }], createdAt: { $gte: new Date(new Date(req.query.startDate).setHours(00, 00, 00)), $lt: new Date(new Date(req.query.endDate).setHours(23, 59, 59)) } }, (error, transaction) => {
+        if (error) {
+            res.status(StatusCodes.BAD_REQUEST).send(error)
+        } else {
+            res.status(StatusCodes.OK).send(transaction);
+        }
     });
     console.log("get all transaction");
 });
