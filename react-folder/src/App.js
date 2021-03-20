@@ -15,33 +15,47 @@ import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import Logout from "./pages/Logout"
 
-// import axios from "axios"
+import axios from "axios"
 
 const jwt = require("jsonwebtoken");
 
 function App() {
   const [user, setUser] = useState({});
+  const [refresh, setRefresh] = useState(false)
+
   console.log("user at App", user);
 
   const secret = process.env.REACT_APP_JWT_SECRET_KEY
   const token = sessionStorage.getItem("token");
 
 
-  useEffect(() => {// initial setup for user
+  useEffect(() => {// GRAB ID FROM TOKEN = axios to get updated info
     if (token !== null) { // logged in
-      const decoded = jwt.verify(token, secret); //cant read secret :/
+      const decoded = jwt.verify(token, secret);
       // TO DO: if token has expire, clear the token
-      setUser({ userId: decoded.user._id, username: decoded.user.username, mobile: decoded.user.mobile, balance: decoded.user.balance, transactions: decoded.user.transactions, updatedAt: decoded.user.updatedAt })
+      axios
+        .get(`/api/user/${decoded.user._id}`)
+        .then((response) => {
+          // console.log(response)
+          const user = response.data
+          setUser({ userId: user._id, username: user.username, mobile: user.mobile, balance: user.balance, transactions: user.transactions, updatedAt: user.updatedAt })
+        })
+        .catch((error) => {
+          console.log("error axios userID", error)
+        })
     }
   }, [token])
 
   // useEffect(() => { //update User
   //   axios
-  //     .get(`/api/user/${user.userId}`)
+  //     .get(`/api/user/${userId}`)
   //     .then((response) => {
   //       console.log(response)
-  //     }
-  //     )
+  //       // setUser({ userId: user._id, username: user.username, mobile: user.mobile, balance: user.balance, transactions: user.transactions, updatedAt: user.updatedAt })
+  //     })
+  //     .catch((error) => {
+  //       console.log("error axios userID", error)
+  //     })
   // }, [])
 
 
@@ -73,10 +87,6 @@ function App() {
               {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} />}
             </Route>
 
-            {/* <Route exact path="/transfer/2">
-              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction2 />}
-            </Route> */}
-
             <Route exact path="/signup">
               {/* <SignUp setUser={setUser} /> */}
               {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />}
@@ -84,7 +94,7 @@ function App() {
 
             <Route exact path="/history">
               {/* <History /> */}
-              {user.userId === undefined ? <Redirect to={"/"} /> : <History />}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <History user={user} />}
             </Route>
 
             <Route exact path="/history/:id">

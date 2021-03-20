@@ -3,6 +3,7 @@ const router = express.Router();
 const Transaction = require("../model/transactionM");
 const methodOverride = require("method-override");
 router.use(methodOverride("_method"));
+const { StatusCodes } = require("http-status-codes");
 
 const dummyData = require("../model/dummyData");
 
@@ -27,14 +28,13 @@ router.get("/", (req, res) => {
 
 //transaction details
 router.get("/:id", (req, res) => {
-    Transaction.find(
-        { _id: req.params.id },
-        (error, transaction) => {
-            res.send(transaction);
-            return transaction;
+    Transaction.findById(req.params.id, (error, transaction) => {
+        if (error) {
+            res.status(StatusCodes.BAD_REQUEST).send(error)
+        } else {
+            res.status(StatusCodes.OK).send(transaction);
         }
-    );
-    console.log("get one transaction");
+    });
 });
 
 // new transaction

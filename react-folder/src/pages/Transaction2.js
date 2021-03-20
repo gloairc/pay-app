@@ -62,7 +62,7 @@ const Transaction2 = (props) => {
                                 console.log("user", user);
                                 console.log("receipient", recipient);
                                 // redirect to history page
-                                pageHistory.push(`/history/{${response.data._id}}`)
+                                pageHistory.push(`/history/${response.data._id}`)
                             }))
                             .catch(axios.spread((errorUser, errorReceipient) => {
                                 console.log("axios errorUser", errorUser);

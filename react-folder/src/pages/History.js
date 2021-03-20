@@ -7,9 +7,10 @@ const History = () => {
         <div>
             Transaction History
 
-            <div>
+
+            <div class="mt-3">
                 <Row>
-                    <Button as={Link} to="/landing">Back</Button>
+                    <Button variant="outline-secondary" as={Link} to="/landing">Back</Button>
                 </Row>
             </div>
         </div>
