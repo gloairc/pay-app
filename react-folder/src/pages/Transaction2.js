@@ -61,6 +61,8 @@ const Transaction2 = (props) => {
                             .then(axios.spread((user, recipient) => {
                                 console.log("user", user);
                                 console.log("receipient", recipient);
+                                //prompt app to refresh as well
+                                props.setRefresh(true);
                                 // redirect to history page
                                 pageHistory.push(`/history/${response.data._id}`)
                             }))

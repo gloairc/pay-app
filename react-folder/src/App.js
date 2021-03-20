@@ -44,20 +44,7 @@ function App() {
           console.log("error axios userID", error)
         })
     }
-  }, [token])
-
-  // useEffect(() => { //update User
-  //   axios
-  //     .get(`/api/user/${userId}`)
-  //     .then((response) => {
-  //       console.log(response)
-  //       // setUser({ userId: user._id, username: user.username, mobile: user.mobile, balance: user.balance, transactions: user.transactions, updatedAt: user.updatedAt })
-  //     })
-  //     .catch((error) => {
-  //       console.log("error axios userID", error)
-  //     })
-  // }, [])
-
+  }, [token, refresh])
 
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
@@ -84,7 +71,7 @@ function App() {
             {/* Transfer $ to someone */}
             <Route exact path="/transfer">
               {/* <Transaction1 /> */}
-              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} />}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} setRefresh={setRefresh} />}
             </Route>
 
             <Route exact path="/signup">
