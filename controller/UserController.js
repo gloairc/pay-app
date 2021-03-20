@@ -92,19 +92,30 @@ router.post(
     }
 );
 
-// Update user
-// User.findByIdAndUpdate(
-//     req.params.id, // id
-//     req.body, // what to update
-//     { new: true },
-//     (error, updatedUser) => {
-//         if (error) {
-//             res.status(StatusCodes.BAD_REQUEST).send(error);
-//         } else {
-//             res.status(StatusCodes.OK).send(updatedUser);
-//         }
-//     }
-// );
+// Update user's transcation array and balance
+router.put("/:id",
+    (req, res) => {
+        const transactionIdAndAmt = req.body
+        // console.log("transactionIdAndAmt", transactionIdAndAmt)
+        User.findById(req.params.id, (error, user) => {
+            if (error) {
+                res.status(StatusCodes.BAD_REQUEST).send(error);
+            } else {
+                user.transactions.push(transactionIdAndAmt.transactionId);
+                user.balance += transactionIdAndAmt.amount
+                user.save((err, updatedUser) => {
+                    if (err) {
+                        res.send("error saving", err);
+                    } else {
+                        console.log("updatedUser", updatedUser)
+                        res.status(StatusCodes.OK).send(updatedUser);
+                    }
+                })
+            }
+        }
+        );
+    }
+)
 
 // Soft-Delete user
 // router.put("/:id/sdelete", (req, res) => {

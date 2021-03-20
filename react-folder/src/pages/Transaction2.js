@@ -31,8 +31,7 @@ const Transaction2 = (props) => {
         if (formData.amount > (balanceAmt)) {
             setErrorMsg(["You do not have sufficient amount"])
         } else { //sufficient amount
-            //axios to own bank account and deduct
-            //axios to R's account to add
+            //axios to Transaction to log
             const completedFormData = { ...formData, from: props.user.username, to: props.receipient.username }
             axios
                 .post("/api/transaction", completedFormData)
@@ -41,12 +40,59 @@ const Transaction2 = (props) => {
                     if (response.data.errors !== undefined) { //errors
                         setErrorMsg([response.data.message])
                     } else {
-                        //redirect
-                        pageHistory.push(`/history/{${response.data._id}}`)
-                    }
+                        //successful log into transaction database
+                        //save the transaction id and amount
+                        const updateUser = {
+                            transactionId: response.data._id,
+                            amount: -(response.data.amount)
+                        }
+                        const updateReceipient = {
+                            transactionId: response.data._id,
+                            amount: response.data.amount
+                        }
+                        // console.log("updateUser", updateUser)
+                        // console.log("updateReceipient", updateReceipient)
+                        // console.log("props.user", props.user)
+                        // console.log("props.receipient", props.receipient)
+                        axios.all([
+                            axios.put(`api/user/${props.user.userId}`, updateUser),
+                            axios.put(`api/user/${props.receipient._id}`, updateReceipient)]
+                        )
+                            .then(axios.spread((user, recipient) => {
+                                console.log("user", user);
+                                console.log("receipient", recipient);
+                                // redirect to history page
+                                pageHistory.push(`/history/{${response.data._id}}`)
+                            }))
+                            .catch(axios.spread((errorUser, errorReceipient) => {
+                                console.log("axios errorUser", errorUser);
+                                console.log("axios errorReceipient", errorReceipient);
+                                // if (errorUser.response === undefined) {
+                                //     setErrorMsg(errorUser.message)
+                                // }
+                                // else if (errorUser.response.data.error === undefined) {
+                                //     setErrorMsg(errorUser.response.statusText);
+                                // } else {
+                                //     setErrorMsg(
+                                //         errorUser.response.statusText + ", " + errorUser.response.data.error
+                                //     );
+                                // }
 
+                                // if (errorReceipient.response === undefined) {
+                                //     setErrorMsg(errorReceipient.message)
+                                // }
+                                // else if (errorReceipient.response.data.error === undefined) {
+                                //     setErrorMsg(errorReceipient.response.statusText);
+                                // } else {
+                                //     setErrorMsg(
+                                //         errorReceipient.response.statusText + ", " + errorReceipient.response.data.error
+                                //     );
+                                // }
+                            }
+                            ));
+                    }
                 })
-                .catch((error) => { //cannot connect
+                .catch((error) => { //error with api/transaction
                     console.log("error", error)
                     if (error.response === undefined) { //JSON token error etc
                         setErrorMsg(error.message)
