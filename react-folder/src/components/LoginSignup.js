@@ -11,7 +11,7 @@ const LoginSignup = (props) => {
     return (
         <div id="login-signup-cont" class="container-fluid">
             <div class="form-h1">
-                <h1>{props.header}</h1>
+                <h1 className="text-center">{props.header}</h1>
             </div>
 
             <div id="login-form-cont" class="container-fluid">

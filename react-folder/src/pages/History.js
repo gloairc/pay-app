@@ -52,9 +52,9 @@ const History = (props) => { //props.user
     return (
         <div>
             <div>
-                <h4 >Transaction History</h4>
+                <h4 className="text-center">Transaction History</h4>
             </div>
-            <div>
+            <div className="text-center">
                 {new Date(dateRange.startDate).toLocaleDateString("en-AU")}
                 {" "}to{" "}
                 {new Date(dateRange.endDate).toLocaleDateString("en-AU")}

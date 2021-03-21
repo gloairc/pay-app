@@ -59,7 +59,7 @@ const Transaction1 = (props) => {
 
     return (
         <div>
-            Choose a Receipient
+            <h4 className="text-center">Choose a Receipient</h4>
             <div>
                 <Form onSubmit={handleSubmit} >
                     <Form.Group controlId="username">

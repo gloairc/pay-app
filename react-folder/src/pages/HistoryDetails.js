@@ -34,7 +34,7 @@ const HistoryDetails = (props) => {
     return (
         <div>
             <div>
-                <h4>Transaction Details</h4>
+                <h4 className="text-center">Transaction Details</h4>
             </div>
             <Card>
                 <ListGroup variant="flush">

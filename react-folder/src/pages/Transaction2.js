@@ -112,7 +112,7 @@ const Transaction2 = (props) => {
 
     return (
         <div>
-            Transfer to {props.receipient.username}
+            <h4 className="text-center"> Transfer to {props.receipient.username}</h4>
             <div>
                 <Form onSubmit={handleSubmit} >
                     <Form.Group controlId="amount">
