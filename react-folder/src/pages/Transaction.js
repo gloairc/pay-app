@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Transaction1 from "./Transaction1"
-import Transaction2 from "./Transaction2"
+import Transaction1 from "../components/Transaction1"
+import Transaction2 from "../components/Transaction2"
 
 const Transaction = (props) => {
     const [receipient, setReceipient] = useState([])
