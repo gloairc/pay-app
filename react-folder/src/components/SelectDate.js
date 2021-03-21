@@ -55,7 +55,7 @@ const SelectDate = (props) => {
                     </Col>
                 </Row>
                 <Row>
-                    <Button variant="info" type="submit">
+                    <Button variant="info" type="submit" onClick={props.onHide}>
                         Select</Button>
                 </Row>
             </Form>

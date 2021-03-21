@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios"
 import { useEffect, useState } from "react"
 import SelectDate from "../components/SelectDate"
+import DateModal from "../components/DateModal"
 
 const History = (props) => { //props.user
     //search transaction database, filter  date, then filter to & from, sort by date & time
     const [transferDetails, setTransferDetails] = useState([])
+    const [modalShow, setModalShow] = useState(false);
 
     const defaultEndDate = new Date() //today
     const defaultStartDate = new Date(defaultEndDate.setMonth(defaultEndDate.getMonth() - 1)) //default one month before
@@ -53,8 +55,17 @@ const History = (props) => { //props.user
             {new Date(dateRange.startDate).toLocaleDateString("en-AU")}
             {" "}to{" "}
             {new Date(dateRange.endDate).toLocaleDateString("en-AU")}
+
             <div>
-                <SelectDate setDateRange={setDateRange} />
+                <Button variant="warning" onClick={() => setModalShow(true)}>
+                    Select Range
+        </Button>
+
+                <DateModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    setDateRange={setDateRange}
+                />
             </div>
 
             <div>

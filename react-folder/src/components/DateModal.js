@@ -1,23 +1,5 @@
 import { Modal, Button } from "react-bootstrap"
-import { useState } from "react"
-
-
-function App() {
-    const [modalShow, setModalShow] = useState(false);
-
-    return (
-        <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
-                Select Range
-        </Button>
-
-            <DateModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
-        </>
-    );
-}
+import SelectDate from "./SelectDate"
 
 const DateModal = (props) => {
 
@@ -25,25 +7,21 @@ const DateModal = (props) => {
         <div>
             <Modal
                 size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
+                aria-labelledby="dateRangePicker-modal"
                 centered
+                show={props.show}
+                onHide={props.onHide}
+
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Modal heading
-        </Modal.Title>
+                <Modal.Header>
+                    <Modal.Title id="dateRangePicker-modal">
+                        Change Date Range
+                        <Button variant="outline-secondary" onClick={props.onHide}>X</Button>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Centered Modal</h4>
-                    <p>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
-        </p>
+                    <SelectDate setDateRange={props.setDateRange} onHide={props.onHide} />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={props.onHide}>Close</Button>
-                </Modal.Footer>
             </Modal>
         </div>
     )
