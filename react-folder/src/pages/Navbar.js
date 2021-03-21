@@ -12,15 +12,14 @@ const Navybar = (props) => {
             variant="light"
             fixed="top"
             style={{ position: "sticky", fontWeight: "bold" }}
-            className="container-fluid d-flex flex-row"
-
+            className="px-2"
         >
             <Navbar.Brand as={Link} to="/">
                 <AccountBalanceWalletTwoTone />{" "}
           PayApp
         </Navbar.Brand>
 
-            <Nav className="justify-content-start" id="navBar-left">
+            <Nav className="mr-auto" id="navBar-left">
                 {loggedIn ? (
                     <Nav.Link as={Link} to="/landing">
                         Home
@@ -29,10 +28,7 @@ const Navybar = (props) => {
             </Nav>
 
             {loggedIn ? (
-                <Nav className="d-flex justify-content-end" id="navBar-right">
-                    <Navbar.Text>
-                        <span id="welcome-name">Welcome {props.user.username}</span>
-                    </Navbar.Text>
+                <Nav className="ml-auto" id="navBar-right">
 
                     <Nav.Link as={Link} to="/logout">
                         Logout{" "}

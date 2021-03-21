@@ -11,6 +11,10 @@ const Landing = (props) => {
     return (
         <div id="landing-cont" class="container-fluid">
 
+            <Row>
+                <h5 className="text-center">Welcome {props.user.username}</h5>
+            </Row>
+
             <Card>
                 <Card.Body>
                     <h3>Balance: </h3>
