@@ -37,7 +37,7 @@ const HistoryDetails = (props) => {
 
             <Row>
                 <Col>You {received ? (<span> received</span>) : (<span> sent</span>)}</Col>
-                <Col> SGD ${transferDetail ? (<span>{transferDetail.amount}</span>) : (<></>)} </Col>
+                <Col> SGD ${transferDetail ? (<span>{transferDetail.amount.toFixed(2)}</span>) : (<></>)} </Col>
             </Row>
 
             <Row>

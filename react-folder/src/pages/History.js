@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios"
 import { useEffect, useState } from "react"
 import DateModal from "../components/DateModal"
-// import EditIcon from '@material-ui/icons/Edit';
 import { Edit } from "@material-ui/icons";
+import Record from "../components/Record"
 
 const History = (props) => { //props.user
     //search transaction database, filter  date, then filter to & from, sort by date & time
@@ -77,19 +77,7 @@ const History = (props) => { //props.user
                 {transferDetails ? (transferDetails.length > 0 ? <div></div> : <div>No transaction found</div>) : <></>}
                 {transferDetails ? (<div>
                     {transferDetails.map((data, index) => (
-                        <table>
-                            < tr key={index} >
-                                <td>{data.createdAt}</td>
-                            </tr>
-                            <tr key={`A${index}`}>
-                                <td>{data.comment}</td>
-                                <td>{data.from}{data.to}</td>
-                                <td>{data.amount}</td>
-                                <td><Button size="sm"
-                                    as={Link} to={`/history/${data._id}`}
-                                >View</Button></td>
-                            </tr>
-                        </table>
+                        <Record index={index} data={data} user={props.user} />
                     ))}
                 </div>) : (<></>)
                 }
