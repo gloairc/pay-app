@@ -6,7 +6,6 @@ const DateModal = (props) => {
     return (
         <div>
             <Modal
-                size="lg"
                 aria-labelledby="dateRangePicker-modal"
                 centered
                 show={props.show}
@@ -15,9 +14,9 @@ const DateModal = (props) => {
             >
                 <Modal.Header>
                     <Modal.Title id="dateRangePicker-modal">
-                        Change Date Range
-                        <Button variant="outline-secondary" onClick={props.onHide}>X</Button>
+                        Select Range
                     </Modal.Title>
+                    <Button variant="outline-secondary" onClick={props.onHide}>X</Button>
                 </Modal.Header>
                 <Modal.Body>
                     <SelectDate setDateRange={props.setDateRange} onHide={props.onHide} />

@@ -2,8 +2,9 @@ import { Row, Button } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { useEffect, useState } from "react"
-import SelectDate from "../components/SelectDate"
 import DateModal from "../components/DateModal"
+// import EditIcon from '@material-ui/icons/Edit';
+import { Edit } from "@material-ui/icons";
 
 const History = (props) => { //props.user
     //search transaction database, filter  date, then filter to & from, sort by date & time
@@ -50,17 +51,21 @@ const History = (props) => { //props.user
 
     return (
         <div>
-            Transaction History
-            <br />
-            {new Date(dateRange.startDate).toLocaleDateString("en-AU")}
-            {" "}to{" "}
-            {new Date(dateRange.endDate).toLocaleDateString("en-AU")}
+            <div>
+                <h4 >Transaction History</h4>
+            </div>
+            <div>
+                {new Date(dateRange.startDate).toLocaleDateString("en-AU")}
+                {" "}to{" "}
+                {new Date(dateRange.endDate).toLocaleDateString("en-AU")}
+                {"   "}
+
+                <Button className="p-0" variant="light" onClick={() => setModalShow(true)}>
+                    <Edit />
+                </Button>
+            </div>
 
             <div>
-                <Button variant="warning" onClick={() => setModalShow(true)}>
-                    Select Range
-        </Button>
-
                 <DateModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}

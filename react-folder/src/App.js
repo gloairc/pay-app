@@ -53,7 +53,6 @@ function App() {
 
         <div id="body-cont" class="container-fluid">
           <Switch>
-            {/* Log in */}
             <Route exact path="/">
               {user.userId === undefined ? <LogIn setUser={setUser} /> : <Redirect to={"/landing"} />}
             </Route>
@@ -64,28 +63,23 @@ function App() {
 
             {/* landing page - balance, button to make transfer or see history */}
             <Route exact path="/landing">
-              {/* <Landing setUser={setUser} /> */}
               {user.userId === undefined ? <Redirect to={"/"} /> : <Landing user={user} />}
             </Route>
 
             {/* Transfer $ to someone */}
             <Route exact path="/transfer">
-              {/* <Transaction1 /> */}
               {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} setRefresh={setRefresh} />}
             </Route>
 
             <Route exact path="/signup">
-              {/* <SignUp setUser={setUser} /> */}
               {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={"/landing"} />}
             </Route>
 
             <Route exact path="/history">
-              {/* <History /> */}
               {user.userId === undefined ? <Redirect to={"/"} /> : <History user={user} />}
             </Route>
 
             <Route exact path="/history/:id">
-              {/* <HistoryDetails user={user}/> */}
               {user.userId === undefined ? <Redirect to={"/"} /> : <HistoryDetails user={user} />}
             </Route>
 
