@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# mobile-wallet-app
+A HTTP-based mobile wallet service where users can: 
+1.	Check their balance
+2.	Transfer money to another user
+3.	Retrieve a summary of their transactions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Tech used
+1. MERN Stack: MongoDB, Express, ReactJS, Node.js
+2. Bootstrap
+3. react-bootstrap
+4. axios
+5. react-router-dom
+6. JSON Web Token
 
-## Available Scripts
+### Assumptions & Design Consideration
+- Designed with mobile interface in mind, has a @media query for smaller screens. In the browser, width is around 50%
+- Each mobile phone only can have one account, hence mobile number has to be unique upon registration. I've made it a requirement for username to be unique since its easier for people to type in username compared to mobile number. But if it was a mobile app, design the app to have access into phone book, so can search by contact book name (e.g how PayNow works).
+  - During sign up, axios call is sent (on blur) to check if username or mobile number already exist in the database and inform user if they are. 
+- In order for users to not lose their filtered date range for the transaction history they chose after they navigate to see a specific transaction record, i stored the date range in the session storage. This date range is clear if user navigate back to home page or log out.
+- Default date range for transaction history is one month from the current date. This minimize hassle for the user to have to input date range before they can see recent transaction.
 
-In the project directory, you can run:
+### Steps to run application (locally without docker)
+1. Open your computer's terminal. The following steps will be run on your terminal.
+2. cd into the repository folder, ```npm install```
+3. cd into the react-folder, ```npm install```
+5. After both dependencies have been installed, at the main repository folder ```npm run start```
+6. cd into the react-folder, ```npm run start```
+7. A browser should pop up with the app running.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Future Developments
+1. Handle errors
+2. Navbar, shift log out to the right
+3. Filter function (send or receive)
+4. Have a spinner while waiting for axios response to come back
