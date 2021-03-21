@@ -9,6 +9,7 @@ const HistoryDetails = (props) => {
 
     const transactionId = useParams().id;
 
+    console.log("props.user", props.user)
     //based on id -> axios and retrieve details
     // sent/ received, amount, from/to, datetime, transaction id, note
     useEffect(() => {

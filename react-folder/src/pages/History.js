@@ -33,7 +33,7 @@ const History = (props) => { //props.user
 
     }, [])
 
-    // for each item in transferDetails array, map it out into card 
+    // for each item in transferDetails array, map it out into card or table role 
 
     return (
         <div>
@@ -50,11 +50,7 @@ const History = (props) => { //props.user
                             <td>{data.from}{data.to}</td>
                             <td>{data.amount}</td>
                             <td><Button size="sm"
-                                // onClick={() => {
-                                //     // console.log("handle view click", data)
-                                //     props.handleViewClick(data);
-                                // }}
-                                variant="primary"
+                                as={Link} to={`/history/${data._id}`}
                             >View</Button></td>
                         </tr>
                     </table>

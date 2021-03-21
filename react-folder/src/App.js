@@ -86,7 +86,7 @@ function App() {
 
             <Route exact path="/history/:id">
               {/* <HistoryDetails /> */}
-              {user.userId === undefined ? <Redirect to={"/"} /> : <HistoryDetails />}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <HistoryDetails user={user} />}
             </Route>
 
 
