@@ -20,18 +20,8 @@ const History = (props) => { //props.user
         }
     }, [])
 
-    // const dateRangeDisplay = () => {
-    //     const dateDisplay = {
-    //         startDate: dateRange.startDate.toLocaleDateString("en-AU"),
-    //         endDate: dateRange.endDate.toLocaleDateString("en-AU"),
-    //     }
-    //     console.log(dateDisplay.startDate)
-    //     return (
-    //         <div>{dateDisplay.startDate} to {dateDisplay.endDate}</div>
-    //     )
-    // }
-
     console.log("dateRange in History", dateRange)
+
 
     useEffect(() => {
         const transactionRange = {
@@ -60,8 +50,9 @@ const History = (props) => { //props.user
         <div>
             Transaction History
             <br />
-            {/* {dateRangeDisplay()} */}
-            {/* {dateRange.startDate.toLocaleDateString("en-AU")} */}
+            {new Date(dateRange.startDate).toLocaleDateString("en-AU")}
+            {" "}to{" "}
+            {new Date(dateRange.endDate).toLocaleDateString("en-AU")}
             <div>
                 <SelectDate setDateRange={setDateRange} />
             </div>
