@@ -9,14 +9,14 @@ const HistoryDetails = (props) => {
 
     const transactionId = useParams().id;
 
-    console.log("props.user", props.user)
+    // console.log("props.user", props.user)
     //based on id -> axios and retrieve details
     // sent/ received, amount, from/to, datetime, transaction id, note
     useEffect(() => {
         axios
             .get(`/api/transaction/${transactionId}`)
             .then((response) => {
-                console.log("transferDetails", response)
+                // console.log("transferDetails", response)
                 const formattedDate = new Date(response.data.createdAt).toLocaleString("en-AU")
                 const updatedTransferDetails = { ...response.data, createdAt: formattedDate }
                 setTransferDetail(updatedTransferDetails)

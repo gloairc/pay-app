@@ -21,19 +21,53 @@ const LoginSignup = (props) => {
                             <span class="fw-bold">Username</span>
                         </Form.Label>
                         <Col>
-                            <Form.Control
-                                type="text"
-                                placeholder={props.usernameText}
-                                value={props.formData.username}
-                                onChange={(event) => {
-                                    // console.log(event.target)
-                                    props.setFormData((state) => {
-                                        return { ...state, username: event.target.value };
-                                    });
-                                }}
-                            />
+                            {props.mobileText !== undefined ?
+                                (<Form.Control
+                                    type="text"
+                                    placeholder={props.usernameText}
+                                    value={props.formData.username}
+                                    onChange={(event) => {
+                                        // console.log(event.target)
+                                        props.setFormData((state) => {
+                                            return { ...state, username: event.target.value };
+                                        });
+                                    }}
+                                    onBlur={(event) => props.handleBlurName(event)}
+                                />) : (<Form.Control
+                                    type="text"
+                                    placeholder={props.usernameText}
+                                    value={props.formData.username}
+                                    onChange={(event) => {
+                                        // console.log(event.target)
+                                        props.setFormData((state) => {
+                                            return { ...state, username: event.target.value };
+                                        });
+                                    }}
+                                />)}
                         </Col>
                     </Form.Group>
+                    {props.mobileText !== undefined ?
+                        (<Form.Group controlId="mobile">
+                            <Form.Label>
+                                <span class="fw-bold">Mobile</span>
+                            </Form.Label>
+                            <Col>
+                                <Form.Control
+                                    type="number"
+                                    placeholder={props.mobileText}
+                                    value={props.formData.mobile}
+                                    onChange={(event) => {
+                                        // console.log(event.target)
+                                        props.setFormData((state) => {
+                                            return { ...state, mobile: event.target.value };
+                                        });
+                                    }}
+                                    onBlur={(event) => props.handleBlurMobile(event)}
+                                />
+                            </Col>
+                        </Form.Group>) : (<></>)
+                    }
+
 
                     <Form.Group controlId="password">
                         <Form.Label>

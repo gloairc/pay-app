@@ -3,8 +3,6 @@ import LoginSignup from "../components/LoginSignup"
 import axios from "axios";
 import { Alert } from "react-bootstrap";
 
-const jwt = require("jsonwebtoken");
-
 const SignUp = (props) => {
     const [formData, setFormData] = useState({
         username: "",
@@ -23,12 +21,12 @@ const SignUp = (props) => {
         axios
             .post("/api/user", formData) //create user
             .then((response) => {
-                console.log("user created, response", response, "time to axios post session");
+                // console.log("user created, response", response, "time to axios post session");
                 //axios a session and get token
                 axios
                     .post("/api/session", formData, { withCredentials: true })
                     .then((response) => {
-                        console.log("response.data from post api session", response.data);
+                        // console.log("response.data from post api session", response.data);
                         if (response.data.token) {//get token
                             //set token to sessionStorage
                             const token = response.data.token;
@@ -92,9 +90,49 @@ const SignUp = (props) => {
         }
     };
 
+    const handleBlurName = (event) => {
+        axios.get("/api/user", {  // /user?username=formData.username
+            params: { username: formData.username }
+        })
+            .then((response) => {// either receive the existing one user else or all users when username ===""
+                // console.log("handle blur response.data", response.data)
+                if (([response.data]).length === 1) { //returns only one
+                    if ([response.data][0].username !== undefined) {
+                        if (formData.username === [response.data][0].username) {
+                            setErrorMsg([{ msg: "Sorry, username already taken." }])
+                        }
+                    } else {
+                        setErrorMsg("")
+                    }
+                } else {
+                    return
+                }
+            })
+    }
+
+    const handleBlurMobile = (event) => {
+        axios.get("/api/user", {  // /user?username=formData.username
+            params: { mobile: formData.mobile }
+        })
+            .then((response) => {// either receive the existing one user else or all users when username ===""
+                // console.log("handle blur response.data", response.data)
+                if (([response.data]).length === 1) { //returns only one
+                    if ([response.data][0].mobile !== undefined) {
+                        if ((formData.mobile - [response.data][0].mobile) === 0) {
+                            setErrorMsg([{ msg: "Sorry, this number already has an existing account." }])
+                        }
+                    } else {
+                        setErrorMsg("")
+                    }
+                } else {
+                    return
+                }
+            })
+    }
+
     return (
         <div id="login-cont" class="container-fluid">
-            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" oppHeaderLink="/" usernameText="at least 6 alphanumeric character" passwordText="6-digit pin" />
+            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" oppHeaderLink="/" usernameText="at least 6 alphanumeric character" passwordText="6-digit pin" mobileText="8-digit mobile number" handleBlurName={handleBlurName} handleBlurMobile={handleBlurMobile} />
         </div>
     )
 }

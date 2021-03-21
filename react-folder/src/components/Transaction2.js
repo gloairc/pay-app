@@ -11,7 +11,7 @@ const Transaction2 = (props) => {
     const pageHistory = useHistory();
 
     const handleBackClick = () => { //reset receipient
-        console.log("handle back click")
+        // console.log("handle back click")
         props.setReceipient({})
     }
 
@@ -36,8 +36,8 @@ const Transaction2 = (props) => {
             axios
                 .post("/api/transaction", completedFormData)
                 .then((response) => {
-                    console.log("response", response)
-                    if (response.data.errors !== undefined) { //errors
+                    // console.log("response", response)
+                    if (response.data.errors !== undefined) { //transaction errors
                         setErrorMsg([response.data.message])
                     } else {
                         //successful log into transaction database
@@ -59,16 +59,29 @@ const Transaction2 = (props) => {
                             axios.put(`api/user/${props.receipient._id}`, updateReceipient)]
                         )
                             .then(axios.spread((user, recipient) => {
-                                console.log("user", user);
-                                console.log("receipient", recipient);
+                                // console.log("user", user);
+                                // console.log("receipient", recipient);
                                 //prompt app to refresh as well
-                                props.setRefresh(true);
+                                if (props.refresh === false) {
+                                    props.setRefresh(true)
+                                } else if (props.refresh === true) {
+                                    props.setRefresh(false)
+                                }
                                 // redirect to history page
                                 pageHistory.push(`/history/${response.data._id}`)
                             }))
                             .catch(axios.spread((errorUser, errorReceipient) => {
                                 console.log("axios errorUser", errorUser);
                                 console.log("axios errorReceipient", errorReceipient);
+                                //TO DO: failed transaction, delete the record away
+                                axios
+                                    .delete(`/api/transaction/${updateUser.transactionId}`)
+                                    .then((response) => {
+                                        console.log("deleted transaction from database")
+                                    })
+                                    .catch((error) => {
+                                        console.log("didnt manage to delete away failed transaction id", error)
+                                    })
                                 // if (errorUser.response === undefined) {
                                 //     setErrorMsg(errorUser.message)
                                 // }

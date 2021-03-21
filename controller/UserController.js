@@ -36,8 +36,22 @@ router.get("/", (req, res) => {
                 console.log(userObj)
             }
         }).lean()
+    } else if (req.query.mobile) { //if query has mobile, check if it exist
+        console.log("req.query.mobile", req.query.mobile);
+        User.find({ mobile: req.query.mobile }, { username: 1, _id: 1, mobile: 1 }, (error, oneUser) => {
+            if (error) {
+                res.status(StatusCodes.BAD_REQUEST).send(error);
+            } else { //user exist
+                // console.log("oneUser", oneUser) //[{username:...,}]
+                const userObj = oneUser[0]
+                res.status(StatusCodes.OK).send(userObj);
+                console.log(userObj)
+            }
+        }).lean()
+
     }
 });
+
 
 // Get record of that one user
 router.get("/:id", (req, res) => {

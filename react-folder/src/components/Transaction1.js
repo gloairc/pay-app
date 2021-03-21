@@ -21,7 +21,7 @@ const Transaction1 = (props) => {
             axios
                 .get("/api/user", { params: { username: formData.username } })
                 .then((response) => {
-                    console.log("response", response)
+                    // console.log("response", response)
                     if (response.data._id === undefined) { // alert no such user
                         setErrorMsg("There is no such user.")
                     } else { // there is such user, move on to next step

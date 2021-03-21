@@ -4,8 +4,6 @@ import axios from "axios";
 import { Alert } from "react-bootstrap";
 import { Redirect } from 'react-router-dom';
 
-const jwt = require("jsonwebtoken");
-
 const LogIn = (props) => {
     const [formData, setFormData] = useState({
         username: "",
@@ -23,7 +21,7 @@ const LogIn = (props) => {
         axios
             .post("/api/session", formData, { withCredentials: true }) //get token
             .then((response) => {
-                console.log("response.data", response.data);
+                // console.log("response.data", response.data);
                 if (response.data.token) {
                     //set token to sessionStorage
                     const token = response.data.token;

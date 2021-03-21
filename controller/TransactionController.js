@@ -47,13 +47,25 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     Transaction.create(req.body, (error, transaction) => {
         if (error) {
-            res.send(error);
+            res.status(StatusCodes.BAD_REQUEST).send(error);
         } else {
-            res.send(transaction);
-            console.log("new transaction successful");
-            return transaction;
+            res.status(StatusCodes.OK).send(transaction);
+            console.log("new transaction successful", transaction);
         }
     });
 });
+
+router.delete("/", (req, res) => {
+    Transaction.findByIdAndDelete(req.params.id, (error, transaction) => {
+        if (error) {
+            res.status(StatusCodes.BAD_REQUEST).send(error);
+        } else {
+            res.status(StatusCodes.OK).send(transaction);
+            console.log("deleted", transaction);
+        }
+    });
+});
+
+
 
 module.exports = router;

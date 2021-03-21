@@ -23,7 +23,7 @@ const History = (props) => { //props.user
         }
     }, [])
 
-    console.log("dateRange in History", dateRange)
+    // console.log("dateRange in History", dateRange)
 
 
     useEffect(() => {
@@ -33,21 +33,19 @@ const History = (props) => { //props.user
             startDate: dateRange.startDate,
             endDate: dateRange.endDate
         }
-        console.log("transactionRange", transactionRange)
+        // console.log("transactionRange", transactionRange)
         sessionStorage.setItem("tempDateRange", JSON.stringify(dateRange));
         axios
             .get("/api/transaction", { params: transactionRange })
             .then((response) => {
-                console.log("axios response", response)
-                setTransferDetails(response.data)
+                // console.log("axios response", response)
+                setTransferDetails((response.data).reverse()) //in descending order
             })
             .catch((error) => {
                 console.log("error", error)
             })
 
     }, [dateRange])
-
-    // for each item in transferDetails array, map it out into card or table role 
 
     return (
         <div>

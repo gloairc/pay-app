@@ -23,11 +23,10 @@ function App() {
   const [user, setUser] = useState({});
   const [refresh, setRefresh] = useState(false)
 
-  console.log("user at App", user);
+  // console.log("user at App", user);
 
   const secret = process.env.REACT_APP_JWT_SECRET_KEY
   const token = sessionStorage.getItem("token");
-
 
   useEffect(() => {// GRAB ID FROM TOKEN = axios to get updated info
     if (token !== null) { // logged in
@@ -68,7 +67,7 @@ function App() {
 
             {/* Transfer $ to someone */}
             <Route exact path="/transfer">
-              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} setRefresh={setRefresh} />}
+              {user.userId === undefined ? <Redirect to={"/"} /> : <Transaction user={user} setRefresh={setRefresh} refresh={refresh} />}
             </Route>
 
             <Route exact path="/signup">
