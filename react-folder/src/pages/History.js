@@ -12,6 +12,25 @@ const History = (props) => { //props.user
     const defaultStartDate = new Date(defaultEndDate.setMonth(defaultEndDate.getMonth() - 1)) //default one month before
     const [dateRange, setDateRange] = useState({ startDate: defaultStartDate, endDate: new Date() })
 
+
+    useEffect(() => { //run when first load the page
+        const storedDateRange = JSON.parse(sessionStorage.getItem("tempDateRange"));
+        if (storedDateRange !== null) {
+            setDateRange(storedDateRange)
+        }
+    }, [])
+
+    // const dateRangeDisplay = () => {
+    //     const dateDisplay = {
+    //         startDate: dateRange.startDate.toLocaleDateString("en-AU"),
+    //         endDate: dateRange.endDate.toLocaleDateString("en-AU"),
+    //     }
+    //     console.log(dateDisplay.startDate)
+    //     return (
+    //         <div>{dateDisplay.startDate} to {dateDisplay.endDate}</div>
+    //     )
+    // }
+
     console.log("dateRange in History", dateRange)
 
     useEffect(() => {
@@ -22,6 +41,7 @@ const History = (props) => { //props.user
             endDate: dateRange.endDate
         }
         console.log("transactionRange", transactionRange)
+        sessionStorage.setItem("tempDateRange", JSON.stringify(dateRange));
         axios
             .get("/api/transaction", { params: transactionRange })
             .then((response) => {
@@ -39,13 +59,15 @@ const History = (props) => { //props.user
     return (
         <div>
             Transaction History
-
+            <br />
+            {/* {dateRangeDisplay()} */}
+            {/* {dateRange.startDate.toLocaleDateString("en-AU")} */}
             <div>
                 <SelectDate setDateRange={setDateRange} />
             </div>
 
             <div>
-                {transferDetails ? <div>hihihihi</div> : <div>mp have </div>}
+                {transferDetails ? (transferDetails.length > 0 ? <div></div> : <div>No transaction found</div>) : <></>}
                 {transferDetails ? (<div>
                     {transferDetails.map((data, index) => (
                         <table>

@@ -1,7 +1,12 @@
+import { useEffect } from "react"
 import { Button, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 const Landing = (props) => {
+
+    useEffect(() => {
+        sessionStorage.removeItem("tempDateRange");
+    }, [])
 
     return (
         <div id="landing-cont" class="container-fluid">

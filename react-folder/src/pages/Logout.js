@@ -9,7 +9,7 @@ const Logout = (props) => {// user={userId, username}
 
     axios.post('api/session/logout')
         .then((response) => {
-            sessionStorage.clear();
+            sessionStorage.clear(); //both token and dateRange
             console.log(response)
         }).then(() => {
             props.setUser({})
