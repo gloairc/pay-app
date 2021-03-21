@@ -1,6 +1,6 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AccountCircle, ExitToApp } from "@material-ui/icons";
+import { AccountBalanceWalletTwoTone, ExitToApp } from "@material-ui/icons";
 import "../App.css";
 
 const Navybar = (props) => {
@@ -12,19 +12,15 @@ const Navybar = (props) => {
             variant="light"
             fixed="top"
             style={{ position: "sticky", fontWeight: "bold" }}
+            className="container-fluid d-flex flex-row"
+
         >
             <Navbar.Brand as={Link} to="/">
-                <img
-                    // src="/drums.png"
-                    width="30"
-                    height="30"
-                    className="d-inline-block align-top"
-                    alt=""
-                />{" "}
+                <AccountBalanceWalletTwoTone />{" "}
           PayApp
         </Navbar.Brand>
 
-            <Nav className="mr-auto" id="navBar-left">
+            <Nav className="justify-content-start" id="navBar-left">
                 {loggedIn ? (
                     <Nav.Link as={Link} to="/landing">
                         Home
@@ -33,7 +29,7 @@ const Navybar = (props) => {
             </Nav>
 
             {loggedIn ? (
-                <Nav className="ml-auto" id="navBar-right">
+                <Nav className="d-flex justify-content-end" id="navBar-right">
                     <Navbar.Text>
                         <span id="welcome-name">Welcome {props.user.username}</span>
                     </Navbar.Text>
@@ -44,7 +40,6 @@ const Navybar = (props) => {
                             <ExitToApp />
                         </span>
                     </Nav.Link>
-
                 </Nav>
             ) : (<></>)}
         </Navbar>

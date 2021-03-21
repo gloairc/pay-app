@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Button, Row } from "react-bootstrap"
+import { Button, Row, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 const Landing = (props) => {
@@ -11,10 +11,12 @@ const Landing = (props) => {
     return (
         <div id="landing-cont" class="container-fluid">
 
-            <div>
-                <h3>Balance: </h3>
-                <h4>${props.user.balance}</h4>
-            </div>
+            <Card>
+                <Card.Body>
+                    <h3>Balance: </h3>
+                    <h4 className="text-end">SGD ${(props.user.balance).toFixed(2)}</h4>
+                </Card.Body>
+            </Card>
 
             <div class="mt-3">
                 <Row>

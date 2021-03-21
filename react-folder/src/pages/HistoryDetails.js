@@ -1,4 +1,4 @@
-import { Row, Button, Col } from "react-bootstrap"
+import { Row, Button, Col, Card, ListGroup } from "react-bootstrap"
 import { useParams, Link } from "react-router-dom";
 import axios from "axios"
 import { useState, useEffect } from "react";
@@ -33,34 +33,43 @@ const HistoryDetails = (props) => {
 
     return (
         <div>
-            Transaction Details
+            <div>
+                <h4>Transaction Details</h4>
+            </div>
+            <Card>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>
+                        <Row>
+                            <Col sm className="text-muted" >You {received ? (<span> received</span>) : (<span> sent</span>)}</Col>
+                            <Col sm className="text-end"> SGD ${transferDetail.amount ? (<span>{transferDetail.amount.toFixed(2)}</span>) : (<></>)} </Col>
+                        </Row>
 
-            <Row>
-                <Col>You {received ? (<span> received</span>) : (<span> sent</span>)}</Col>
-                <Col> SGD ${transferDetail ? (<span>{transferDetail.amount.toFixed(2)}</span>) : (<></>)} </Col>
-            </Row>
+                        <Row>
+                            <Col sm className="text-muted">{received ? (<span>From</span>) : (<span>To</span>)}</Col>
+                            <Col sm className="text-end">{received ? (<span>{transferDetail.from}</span>) : (<span>{transferDetail.to}</span>)}</Col>
+                        </Row>
 
-            <Row>
-                <Col>{received ? (<span>From</span>) : (<span>To</span>)}</Col>
-                <Col>{received ? (<span>{transferDetail.from}</span>) : (<span>{transferDetail.to}</span>)}</Col>
-            </Row>
-
-            <Row>
-                <Col sm>Date & Time </Col>
-                <Col sm>  {transferDetail ? (<span>{transferDetail.createdAt}</span>) : (<></>)}</Col>
-            </Row>
-            <Row>
-                <Col>Transaction ID: </Col>
-            </Row>
-            <Row>
-                <Col>{transactionId}</Col>
-            </Row>
-            <Row>
-                <Col>Comment:</Col>
-            </Row>
-            <Row>
-                <Col>{transferDetail ? (<span>{transferDetail.comment}</span>) : (<></>)}</Col>
-            </Row>
+                        <Row>
+                            <Col sm className="text-muted">Date & Time </Col>
+                            <Col sm className="text-end">  {transferDetail ? (<span>{transferDetail.createdAt}</span>) : (<></>)}</Col>
+                        </Row>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Row>
+                            <Col className="text-muted">Transaction ID: </Col>
+                        </Row>
+                        <Row>
+                            <Col>{transactionId}</Col>
+                        </Row>
+                        <Row>
+                            <Col className="text-muted">Comment:</Col>
+                        </Row>
+                        <Row>
+                            <Col>{transferDetail ? (<span>{transferDetail.comment}</span>) : (<></>)}</Col>
+                        </Row>
+                    </ListGroup.Item>
+                </ListGroup>
+            </Card>
 
             <div class="mt-3">
                 <Row>
