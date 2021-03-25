@@ -132,7 +132,7 @@ const SignUp = (props) => {
 
     return (
         <div id="login-cont" class="container-fluid">
-            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" oppHeaderLink="/" usernameText="at least 6 alphanumeric character" passwordText="6-digit pin" mobileText="8-digit mobile number" handleBlurName={handleBlurName} handleBlurMobile={handleBlurMobile} />
+            <LoginSignup handleSubmit={handleLogin} setFormData={setFormData} formData={formData} message={setMessage} header="Create an Account" button="Sign Up" oppHeader="Log In" oppHeaderLink="/" usernameText="at least 6 alphanumeric character" passwordText="6-digit pin" mobileText="8-digit mobile number" handleBlurName={handleBlurName} handleBlurMobile={handleBlurMobile} wordsOnTopOfButton2="Already have an accout?" />
         </div>
     )
 }

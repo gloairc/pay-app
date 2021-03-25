@@ -100,7 +100,6 @@ const LoginSignup = (props) => {
                     </Row>
 
                     <br />
-                    Sign-up bonus of $10
                     <Row>
                         {props.message()}
                     </Row>
@@ -109,8 +108,8 @@ const LoginSignup = (props) => {
 
             <div id="login-signup" class="container-fluid">
                 <Row>
-                    Don't have an account?
-                <Button variant="secondary" block href={props.oppHeaderLink}>
+                    {props.wordsOnTopOfButton2}
+                    <Button variant="secondary" block href={props.oppHeaderLink}>
                         {props.oppHeader}
                     </Button>
                 </Row>
