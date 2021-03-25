@@ -26,14 +26,14 @@ function App() {
 
   // console.log("user at App", user);
 
-  // const secret = process.env.REACT_APP_JWT_SECRET_KEY
+  const secret = process.env.REACT_APP_JWT_SECRET_KEY
   // console.log("secret", secret)
 
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {// GRAB ID FROM TOKEN = axios to get updated info
     if (token !== null) { // logged in
-      const decoded = jwt.verify(token, "secret");
+      const decoded = jwt.verify(token, secret);
       // TO DO: if token has expire, clear the token
       axios
         .get(`/api/user/${decoded.user._id}`)
