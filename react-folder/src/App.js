@@ -17,7 +17,7 @@ import Logout from "./pages/Logout"
 import axios from "axios"
 
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv")
+// const dotenv = require("dotenv")
 // dotenv.config({ path: "../.env" })
 
 function App() {
@@ -26,14 +26,14 @@ function App() {
 
   // console.log("user at App", user);
 
-  const secret = dotenv.config({ path: "../.env" }).REACT_APP_JWT_SECRET_KEY
+  // const secret = process.env.REACT_APP_JWT_SECRET_KEY
   // console.log("secret", secret)
 
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {// GRAB ID FROM TOKEN = axios to get updated info
     if (token !== null) { // logged in
-      const decoded = jwt.verify(token, secret);
+      const decoded = jwt.verify(token, "secret");
       // TO DO: if token has expire, clear the token
       axios
         .get(`/api/user/${decoded.user._id}`)
