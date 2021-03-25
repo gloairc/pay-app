@@ -14,10 +14,11 @@ import SignUp from "./pages/SignUp"
 import History from "./pages/History"
 import HistoryDetails from "./pages/HistoryDetails"
 import Logout from "./pages/Logout"
-
 import axios from "axios"
 
 const jwt = require("jsonwebtoken");
+// const dotenv = require("dotenv")
+// dotenv.config({ path: "../.env" })
 
 function App() {
   const [user, setUser] = useState({});
@@ -26,6 +27,8 @@ function App() {
   // console.log("user at App", user);
 
   const secret = process.env.REACT_APP_JWT_SECRET_KEY
+  console.log("secret", secret)
+
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {// GRAB ID FROM TOKEN = axios to get updated info
