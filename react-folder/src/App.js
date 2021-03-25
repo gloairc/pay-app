@@ -17,7 +17,7 @@ import Logout from "./pages/Logout"
 import axios from "axios"
 
 const jwt = require("jsonwebtoken");
-// const dotenv = require("dotenv")
+const dotenv = require("dotenv")
 // dotenv.config({ path: "../.env" })
 
 function App() {
@@ -26,8 +26,8 @@ function App() {
 
   // console.log("user at App", user);
 
-  const secret = process.env.REACT_APP_JWT_SECRET_KEY
-  console.log("secret", secret)
+  const secret = dotenv.config({ path: "../.env" }).REACT_APP_JWT_SECRET_KEY
+  // console.log("secret", secret)
 
   const token = sessionStorage.getItem("token");
 
