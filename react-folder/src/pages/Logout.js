@@ -1,6 +1,6 @@
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 const Logout = (props) => {// user={userId, username}
 

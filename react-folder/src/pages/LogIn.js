@@ -13,7 +13,7 @@ const LogIn = (props) => {
     const [errorMsg, setErrorMsg] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const secret = process.env.REACT_APP_JWT_SECRET_KEY;
+    // const secret = process.env.REACT_APP_JWT_SECRET_KEY;
 
     const handleLogin = (event) => {
         event.preventDefault();

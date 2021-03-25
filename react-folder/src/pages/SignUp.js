@@ -10,10 +10,10 @@ const SignUp = (props) => {
     });
 
     const [errorMsg, setErrorMsg] = useState("");
-    const [loginStatus, setLoginStatus] = useState(false); //to redirect to /
+    // const [loginStatus, setLoginStatus] = useState(false); //to redirect to /
     const [status, setStatus] = useState(""); //inform user that logging in
 
-    const secret = process.env.JWT_SECRET_KEY;
+    // const secret = process.env.JWT_SECRET_KEY;
 
     const handleLogin = (event) => {
         event.preventDefault();
