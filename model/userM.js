@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
         username: { type: String, required: true, unique: true },
         mobile: { type: Number, required: true, unique: true },
         password: { type: String, required: true },
-        balance: { type: Number, required: true, default: 0 },
+        balance: { type: Number, required: true, default: 100 },
         transactions: [
             {
                 type: mongoose.Schema.Types.ObjectId,

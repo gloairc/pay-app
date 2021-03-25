@@ -100,6 +100,7 @@ const LoginSignup = (props) => {
                     </Row>
 
                     <br />
+                    Sign-up bonus of $10
                     <Row>
                         {props.message()}
                     </Row>
