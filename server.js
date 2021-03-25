@@ -25,6 +25,7 @@ mongoose.connect(dbconnection, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true
 });
 
 db.on("error", (err) => console.log(err.message + " . mongod not running?"));
